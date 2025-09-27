@@ -1,6 +1,6 @@
 const countdownElement = document.getElementById('countdown');
 
-const targetDate = new Date('2025-11-01T07:30:00');
+const targetDate = new Date('2025-11-01T07:30:00-05:00');
 
 function updateCountdown() {
   const now = new Date();
