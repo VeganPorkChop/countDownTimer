@@ -1,0 +1,68 @@
+:root {
+  color-scheme: dark;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #2b6cb0, #1a202c 60%);
+  color: #f7fafc;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.headline {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+.names {
+  display: block;
+}
+
+.tagline {
+  display: block;
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.countdown {
+  font-size: clamp(1.8rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 1.5rem;
+  }
+
+  .headline {
+    letter-spacing: 0.08em;
+  }
+
+  .tagline {
+    letter-spacing: 0.12em;
+  }
+}
