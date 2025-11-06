@@ -12,6 +12,79 @@
         <span class="names">MACEY + GRAHAM</span>
         <span class="tagline">COLAB IN</span>
       </h1>
+      <div class="hourglass" aria-hidden="true">
+        <svg
+          class="hourglass-art"
+          viewBox="0 0 120 220"
+          xmlns="http://www.w3.org/2000/svg"
+          role="presentation"
+        >
+          <defs>
+            <linearGradient
+              id="hourglass-sand-gradient"
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
+              <stop offset="0%" stop-color="#facc15" />
+              <stop offset="100%" stop-color="#f97316" />
+            </linearGradient>
+            <clipPath id="hourglass-top-bulb">
+              <path d="M24 18H96L68 110H52Z" />
+            </clipPath>
+            <clipPath id="hourglass-bottom-bulb">
+              <path d="M24 202H96L68 110H52Z" />
+            </clipPath>
+          </defs>
+          <g class="hourglass-glass">
+            <path
+              class="hourglass-frame"
+              d="M24 18H96L70 110L96 202H24L50 110Z"
+            />
+            <path
+              class="hourglass-inner"
+              d="M30 24H90L66.5 110L90 196H30L53.5 110Z"
+            />
+            <path
+              class="hourglass-highlight"
+              d="M36 30C40 26 52 22 60 22C68 22 78 24 84 28L70 110Z"
+            />
+            <path
+              class="hourglass-highlight hourglass-highlight--bottom"
+              d="M36 190C40 194 52 198 60 198C68 198 78 196 84 192L70 110Z"
+            />
+          </g>
+          <g clip-path="url(#hourglass-top-bulb)">
+            <rect
+              class="hourglass-sand hourglass-sand--top"
+              x="24"
+              y="18"
+              width="72"
+              height="92"
+              rx="6"
+            />
+          </g>
+          <g clip-path="url(#hourglass-bottom-bulb)">
+            <rect
+              class="hourglass-sand hourglass-sand--bottom"
+              x="24"
+              y="110"
+              width="72"
+              height="92"
+              rx="6"
+            />
+          </g>
+          <rect
+            class="hourglass-stream"
+            x="58"
+            y="108"
+            width="4"
+            height="20"
+            rx="2"
+          />
+        </svg>
+      </div>
       <div id="countdown" class="countdown">Loading…</div>
     </main>
     <div id="confetti-container" aria-hidden="true"></div>

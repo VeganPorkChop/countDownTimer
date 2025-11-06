@@ -1,6 +1,10 @@
 :root {
   color-scheme: dark;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --hourglass-top-fill: 1;
+  --hourglass-bottom-fill: 0;
+  --hourglass-stream-scale: 0;
+  --hourglass-stream-opacity: 0;
 }
 
 * {
@@ -79,6 +83,67 @@ body {
   font-size: clamp(2rem, 6vw, 4.5rem);
   font-weight: 700;
   letter-spacing: 0.2em;
+}
+
+.hourglass {
+  position: relative;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 18px 32px rgba(10, 16, 35, 0.55));
+}
+
+.hourglass-art {
+  width: clamp(160px, 32vw, 240px);
+  height: auto;
+}
+
+.hourglass-glass {
+  fill: none;
+}
+
+.hourglass-frame {
+  fill: none;
+  stroke: rgba(226, 232, 240, 0.75);
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+
+.hourglass-inner {
+  fill: rgba(15, 23, 42, 0.45);
+}
+
+.hourglass-highlight {
+  fill: rgba(148, 163, 184, 0.28);
+}
+
+.hourglass-highlight--bottom {
+  opacity: 0.55;
+}
+
+.hourglass-sand {
+  fill: url(#hourglass-sand-gradient);
+  transform-box: fill-box;
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hourglass-sand--top {
+  transform-origin: 50% 0%;
+  transform: scaleY(var(--hourglass-top-fill));
+}
+
+.hourglass-sand--bottom {
+  transform-origin: 50% 100%;
+  transform: scaleY(var(--hourglass-bottom-fill));
+}
+
+.hourglass-stream {
+  fill: #facc15;
+  opacity: var(--hourglass-stream-opacity);
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  transform: scaleY(var(--hourglass-stream-scale));
+  transition: opacity 0.6s ease, transform 0.8s ease;
+  filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.55));
 }
 
 .countdown {
