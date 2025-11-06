@@ -20,7 +20,42 @@ body {
   padding: 2rem;
 }
 
+#confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -12vh;
+  left: 0;
+  width: var(--size, 0.75rem);
+  height: calc(var(--size, 0.75rem) * 2);
+  background: var(--color, #fbbf24);
+  opacity: var(--opacity, 0.85);
+  border-radius: 0.3rem;
+  transform: translate3d(0, -100%, 0);
+  animation: confettiFall linear infinite;
+  animation-duration: var(--duration, 8s);
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translate3d(0, -120vh, 0) rotateZ(0deg);
+  }
+  100% {
+    transform: translate3d(var(--drift, 0px), 120vh, 0)
+      rotateZ(var(--rotation, 720deg));
+  }
+}
+
 .hero {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
