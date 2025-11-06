@@ -1,6 +1,7 @@
 const countdownElement = document.getElementById('countdown');
-
-const targetDate = new Date('2025-11-01T07:30:00');
+const targetDate = new Date('2025-11-25T13:35:00');
+const confettiContainer = document.getElementById('confetti-container');
+let countdownIntervalId = null;
 
 function updateCountdown() {
   const now = new Date();
@@ -8,6 +9,10 @@ function updateCountdown() {
 
   if (diff <= 0) {
     countdownElement.textContent = 'THE COLAB IS LIVE!';
+    if (countdownIntervalId !== null) {
+      clearInterval(countdownIntervalId);
+      countdownIntervalId = null;
+    }
     return;
   }
 
@@ -28,10 +33,48 @@ function updateCountdown() {
 }
 
 updateCountdown();
-const intervalId = setInterval(updateCountdown, 1000);
+countdownIntervalId = setInterval(updateCountdown, 1000);
 
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden) {
     updateCountdown();
   }
 });
+
+function createConfetti() {
+  if (!confettiContainer) {
+    return;
+  }
+
+  const colors = ['#f97316', '#38bdf8', '#fcd34d', '#34d399', '#c084fc', '#f472b6'];
+  const confettiCount = 140;
+
+  for (let i = 0; i < confettiCount; i += 1) {
+    const piece = document.createElement('span');
+    piece.className = 'confetti-piece';
+
+    const size = (Math.random() * 0.5 + 0.6).toFixed(2);
+    const duration = (Math.random() * 6 + 7).toFixed(2);
+    const delay = (Math.random() * 4).toFixed(2);
+    const drift = `${(Math.random() * 220 - 110).toFixed(0)}px`;
+    const rotation = `${Math.random() > 0.5 ? '' : '-'}${(
+      Math.random() * 540 + 540
+    ).toFixed(0)}deg`;
+
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.setProperty('--size', `${size}rem`);
+    piece.style.setProperty('--duration', `${duration}s`);
+    piece.style.setProperty('--delay', `${delay}s`);
+    piece.style.setProperty('--drift', drift);
+    piece.style.setProperty('--rotation', rotation);
+    piece.style.setProperty(
+      '--color',
+      colors[Math.floor(Math.random() * colors.length)]
+    );
+    piece.style.setProperty('--opacity', (Math.random() * 0.4 + 0.55).toFixed(2));
+
+    confettiContainer.appendChild(piece);
+  }
+}
+
+createConfetti();
