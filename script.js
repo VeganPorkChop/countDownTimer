@@ -1,11 +1,46 @@
 const countdownElement = document.getElementById('countdown');
 const targetDate = new Date('2025-11-25T13:35:00');
 const confettiContainer = document.getElementById('confetti-container');
+const rootElement = document.documentElement;
+const totalCountdownDuration = Math.max(
+  targetDate.getTime() - Date.now(),
+  0
+);
+const hourglassDuration = totalCountdownDuration > 0 ? totalCountdownDuration : 1;
 let countdownIntervalId = null;
+
+function setHourglassState(remainingMs) {
+  if (!rootElement) {
+    return;
+  }
+
+  const remaining = Math.max(remainingMs, 0);
+  const progress = hourglassDuration > 0 ? remaining / hourglassDuration : 0;
+  const topFill = Math.max(0, Math.min(1, progress));
+  const bottomFill = Math.max(0, Math.min(1, 1 - topFill));
+  const streamActive = remaining > 0 && topFill > 0.001;
+  const streamScale = streamActive ? Math.min(1, 1 - topFill + 0.05) : 0;
+
+  rootElement.style.setProperty('--hourglass-top-fill', topFill.toFixed(4));
+  rootElement.style.setProperty(
+    '--hourglass-bottom-fill',
+    bottomFill.toFixed(4)
+  );
+  rootElement.style.setProperty(
+    '--hourglass-stream-scale',
+    streamScale.toFixed(4)
+  );
+  rootElement.style.setProperty(
+    '--hourglass-stream-opacity',
+    streamActive ? '1' : '0'
+  );
+}
 
 function updateCountdown() {
   const now = new Date();
   const diff = targetDate.getTime() - now.getTime();
+
+  setHourglassState(diff);
 
   if (diff <= 0) {
     countdownElement.textContent = 'THE COLAB IS LIVE!';
