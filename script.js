@@ -33,9 +33,10 @@ function updateCountdown() {
   const now = new Date();
   const diff = targetDate.getTime() - now.getTime();
 
-  setHourglassState(diff);
-
   if (diff <= 0) {
+    // Force the hourglass into its finished state so the bottom bulb is full
+    // and the stream shuts off exactly when the countdown completes.
+    setHourglassState(0);
     countdownElement.textContent = 'THE COLAB IS LIVE!';
     if (countdownIntervalId !== null) {
       clearInterval(countdownIntervalId);
@@ -43,6 +44,8 @@ function updateCountdown() {
     }
     return;
   }
+
+  setHourglassState(diff);
 
   const totalSeconds = Math.floor(diff / 1000);
   const days = Math.floor(totalSeconds / (24 * 60 * 60));
