@@ -1,12 +1,8 @@
 const countdownElement = document.getElementById('countdown');
-const targetDate = new Date('2025-11-25T13:35:00');
+const targetDate = new Date('2025-11-22T10:00:00-05:00');
 const confettiContainer = document.getElementById('confetti-container');
 const rootElement = document.documentElement;
-const totalCountdownDuration = Math.max(
-  targetDate.getTime() - Date.now(),
-  0
-);
-const hourglassDuration = totalCountdownDuration > 0 ? totalCountdownDuration : 1;
+const HOURGLASS_WINDOW_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 let countdownIntervalId = null;
 
 function setHourglassState(remainingMs) {
@@ -15,20 +11,17 @@ function setHourglassState(remainingMs) {
   }
 
   const remaining = Math.max(remainingMs, 0);
-  const progress = hourglassDuration > 0 ? remaining / hourglassDuration : 0;
-  const topFill = Math.max(0, Math.min(1, progress));
+  const cappedRemaining = Math.min(remaining, HOURGLASS_WINDOW_MS);
+  const topFill = HOURGLASS_WINDOW_MS
+    ? Math.max(0, Math.min(1, cappedRemaining / HOURGLASS_WINDOW_MS))
+    : 0;
   const bottomFill = Math.max(0, Math.min(1, 1 - topFill));
-  const streamActive = remaining > 0 && topFill > 0.001;
-  const streamScale = streamActive ? Math.min(1, 1 - topFill + 0.05) : 0;
+  const streamActive = remaining > 0;
 
   rootElement.style.setProperty('--hourglass-top-fill', topFill.toFixed(4));
   rootElement.style.setProperty(
     '--hourglass-bottom-fill',
     bottomFill.toFixed(4)
-  );
-  rootElement.style.setProperty(
-    '--hourglass-stream-scale',
-    streamScale.toFixed(4)
   );
   rootElement.style.setProperty(
     '--hourglass-stream-opacity',
@@ -40,9 +33,10 @@ function updateCountdown() {
   const now = new Date();
   const diff = targetDate.getTime() - now.getTime();
 
-  setHourglassState(diff);
-
   if (diff <= 0) {
+    // Force the hourglass into its finished state so the bottom bulb is full
+    // and the stream shuts off exactly when the countdown completes.
+    setHourglassState(0);
     countdownElement.textContent = 'THE COLAB IS LIVE!';
     if (countdownIntervalId !== null) {
       clearInterval(countdownIntervalId);
@@ -50,6 +44,8 @@ function updateCountdown() {
     }
     return;
   }
+
+  setHourglassState(diff);
 
   const totalSeconds = Math.floor(diff / 1000);
   const days = Math.floor(totalSeconds / (24 * 60 * 60));

@@ -3,7 +3,6 @@
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --hourglass-top-fill: 1;
   --hourglass-bottom-fill: 0;
-  --hourglass-stream-scale: 0;
   --hourglass-stream-opacity: 0;
 }
 
@@ -141,9 +140,21 @@ body {
   opacity: var(--hourglass-stream-opacity);
   transform-box: fill-box;
   transform-origin: 50% 0%;
-  transform: scaleY(var(--hourglass-stream-scale));
-  transition: opacity 0.6s ease, transform 0.8s ease;
+  animation: hourglassStreamFlow 0.85s ease-in-out infinite;
+  transition: opacity 0.6s ease;
   filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.55));
+}
+
+@keyframes hourglassStreamFlow {
+  0% {
+    transform: scaleY(0.7);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0.7);
+  }
 }
 
 .countdown {
