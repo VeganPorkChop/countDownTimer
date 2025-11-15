@@ -1,0 +1,13 @@
+{
+  "name": "countdowntimer",
+  "version": "1.0.0",
+  "description": "Static countdown timer site with minimal Node server for Render deployment.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["countdown", "timer", "static", "render"],
+  "author": "",
+  "license": "MIT"
+}
