@@ -77,7 +77,7 @@ function createConfetti() {
     return;
   }
 
-  const colors = ['#f97316', '#38bdf8', '#fcd34d', '#34d399', '#c084fc', '#f472b6'];
+  const colors = ['#f59e0b', '#d97706', '#92400e', '#fbbf24', '#b45309', '#b91c1c'];
   const confettiCount = 140;
 
   for (let i = 0; i < confettiCount; i += 1) {
