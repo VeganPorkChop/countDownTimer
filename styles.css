@@ -280,8 +280,7 @@ body::after {
   z-index: 0;
 }
 
-.scene img,
-.scene svg {
+.scene img {
   position: absolute;
   filter: drop-shadow(0 16px 22px rgba(0, 0, 0, 0.4));
   user-select: none;
@@ -316,6 +315,11 @@ body::after {
   bottom: 1.4rem;
   right: 8%;
   animation-delay: 1.4s;
+  border-radius: 18px;
+  background: radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.18), transparent 48%),
+    linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(15, 118, 110, 0.5));
+  border: 6px solid rgba(241, 245, 249, 0.8);
+  object-fit: cover;
 }
 
 @keyframes float {
