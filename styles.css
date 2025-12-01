@@ -30,6 +30,13 @@ body {
   overflow: hidden;
 }
 
+@media (max-height: 820px) {
+  body {
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+}
+
 body::before {
   content: '';
   position: fixed;
