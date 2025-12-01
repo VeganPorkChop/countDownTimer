@@ -1,5 +1,5 @@
 const countdownElement = document.getElementById('countdown');
-const targetDate = new Date('2025-11-22T10:00:00-05:00');
+const targetDate = new Date('2025-12-11T13:34:00-05:00');
 const confettiContainer = document.getElementById('confetti-container');
 const rootElement = document.documentElement;
 const HOURGLASS_WINDOW_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
@@ -34,10 +34,8 @@ function updateCountdown() {
   const diff = targetDate.getTime() - now.getTime();
 
   if (diff <= 0) {
-    // Force the hourglass into its finished state so the bottom bulb is full
-    // and the stream shuts off exactly when the countdown completes.
     setHourglassState(0);
-    countdownElement.textContent = 'THE COLAB IS LIVE!';
+    countdownElement.textContent = 'THE HOLIDAY COLAB IS LIVE!';
     if (countdownIntervalId !== null) {
       clearInterval(countdownIntervalId);
       countdownIntervalId = null;
@@ -77,8 +75,8 @@ function createConfetti() {
     return;
   }
 
-  const colors = ['#f59e0b', '#d97706', '#92400e', '#fbbf24', '#b45309', '#b91c1c'];
-  const confettiCount = 140;
+  const colors = ['#b7ff53', '#f43f5e', '#0ea5e9', '#f59e0b', '#16a34a'];
+  const confettiCount = 150;
 
   for (let i = 0; i < confettiCount; i += 1) {
     const piece = document.createElement('span');
