@@ -5,6 +5,7 @@
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
+    "postinstall": "chmod +x yertttt && mkdir -p node_modules/.bin && ln -sf \"$PWD/yertttt\" node_modules/.bin/yertttt",
     "start": "node server.js",
     "yertttt": "./yertttt"
   },
