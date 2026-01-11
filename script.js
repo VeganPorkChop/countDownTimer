@@ -1,18 +1,27 @@
 const countdownElement = document.getElementById('countdown');
-const targetDate = new Date('2026-02-13T07:57:00-06:00');
 const confettiContainer = document.getElementById('confetti-container');
 let countdownIntervalId = null;
+let targetDate = getNextTargetDate();
+
+function getNextTargetDate() {
+  const now = new Date();
+  const currentYear = now.getUTCFullYear();
+  let nextTarget = new Date(`${currentYear}-02-13T07:57:00-06:00`);
+
+  if (now.getTime() >= nextTarget.getTime()) {
+    nextTarget = new Date(`${currentYear + 1}-02-13T07:57:00-06:00`);
+  }
+
+  return nextTarget;
+}
 
 function updateCountdown() {
   const now = new Date();
   const diff = targetDate.getTime() - now.getTime();
 
   if (diff <= 0) {
-    countdownElement.textContent = "VALENTINE'S DAY IS HERE!";
-    if (countdownIntervalId !== null) {
-      clearInterval(countdownIntervalId);
-      countdownIntervalId = null;
-    }
+    targetDate = getNextTargetDate();
+    updateCountdown();
     return;
   }
 
