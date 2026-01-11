@@ -1,49 +1,20 @@
 const countdownElement = document.getElementById('countdown');
-const targetDate = new Date('2025-12-11T13:34:00-05:00');
+const targetDate = new Date('2026-02-13T07:57:00-06:00');
 const confettiContainer = document.getElementById('confetti-container');
-const rootElement = document.documentElement;
-const HOURGLASS_WINDOW_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 let countdownIntervalId = null;
-
-function setHourglassState(remainingMs) {
-  if (!rootElement) {
-    return;
-  }
-
-  const remaining = Math.max(remainingMs, 0);
-  const cappedRemaining = Math.min(remaining, HOURGLASS_WINDOW_MS);
-  const topFill = HOURGLASS_WINDOW_MS
-    ? Math.max(0, Math.min(1, cappedRemaining / HOURGLASS_WINDOW_MS))
-    : 0;
-  const bottomFill = Math.max(0, Math.min(1, 1 - topFill));
-  const streamActive = remaining > 0;
-
-  rootElement.style.setProperty('--hourglass-top-fill', topFill.toFixed(4));
-  rootElement.style.setProperty(
-    '--hourglass-bottom-fill',
-    bottomFill.toFixed(4)
-  );
-  rootElement.style.setProperty(
-    '--hourglass-stream-opacity',
-    streamActive ? '1' : '0'
-  );
-}
 
 function updateCountdown() {
   const now = new Date();
   const diff = targetDate.getTime() - now.getTime();
 
   if (diff <= 0) {
-    setHourglassState(0);
-    countdownElement.textContent = 'THE HOLIDAY COLAB IS LIVE!';
+    countdownElement.textContent = "VALENTINE'S DAY IS HERE!";
     if (countdownIntervalId !== null) {
       clearInterval(countdownIntervalId);
       countdownIntervalId = null;
     }
     return;
   }
-
-  setHourglassState(diff);
 
   const totalSeconds = Math.floor(diff / 1000);
   const days = Math.floor(totalSeconds / (24 * 60 * 60));
@@ -75,7 +46,7 @@ function createConfetti() {
     return;
   }
 
-  const colors = ['#b7ff53', '#f43f5e', '#0ea5e9', '#f59e0b', '#16a34a'];
+  const colors = ['#f472b6', '#fb7185', '#fda4af', '#fecdd3', '#f43f5e'];
   const confettiCount = 150;
 
   for (let i = 0; i < confettiCount; i += 1) {
